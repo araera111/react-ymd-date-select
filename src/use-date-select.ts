@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Locale } from "date-fns";
 import formatDate from "date-fns/format";
-import { range } from "./range";
+import dayjs from "dayjs";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { compileDateString, parseDateString } from "./date-string";
+import { range } from "./range";
 import { Options } from "./types";
 
 const DEFAULT_FIRST_YEAR = 2000;
@@ -174,7 +175,7 @@ export const useDateSelect = (
       opts.lastYear != null ? opts.lastYear : new Date().getFullYear();
     return range(firstYear, lastYear).map((i) => {
       const label = yearFormat
-        ? formatDate(new Date(i, 0, 1), yearFormat, { locale })
+        ? dayjs(new Date(i, 0, 1)).format("YYYY(rrrr年)")
         : i.toString();
       return { value: convertToSelectValue(i), label };
     });
