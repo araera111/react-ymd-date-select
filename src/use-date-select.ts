@@ -1,6 +1,5 @@
 import { Locale } from "date-fns";
 import formatDate from "date-fns/format";
-import dayjs from "dayjs";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { compileDateString, parseDateString } from "./date-string";
 import { range } from "./range";
@@ -67,6 +66,7 @@ export interface UseDateSelectOptions {
   yearFormat?: string;
   monthFormat?: string;
   dayFormat?: string;
+  isSeireki?: boolean;
 }
 export interface UseDateSelectInterface {
   yearValue: string;
@@ -168,15 +168,28 @@ export const useDateSelect = (
   const locale = opts.locale;
 
   const yearFormat = opts.yearFormat;
+
+  const getYearLabel = (i: number) => {
+    const formatter = new Intl.DateTimeFormat("ja-JP-u-ca-japanese", {
+      year: "numeric",
+    });
+    const result = formatter.format(new Date(i, 0, 1));
+    if (opts.isSeireki && yearFormat)
+      return (
+        formatDate(new Date(i, 0, 1), yearFormat, { locale }) + `(${result})`
+      );
+    return yearFormat
+      ? formatDate(new Date(i, 0, 1), yearFormat, { locale })
+      : i.toString();
+  };
+
   const rawYearOptions = useMemo(() => {
     const firstYear =
       opts.firstYear != null ? opts.firstYear : DEFAULT_FIRST_YEAR;
     const lastYear =
       opts.lastYear != null ? opts.lastYear : new Date().getFullYear();
     return range(firstYear, lastYear).map((i) => {
-      const label = yearFormat
-        ? dayjs(new Date(i, 0, 1)).format("YYYY(rrrr年)")
-        : i.toString();
+      const label = getYearLabel(i);
       return { value: convertToSelectValue(i), label };
     });
   }, [opts.firstYear, opts.lastYear, locale, yearFormat]);
