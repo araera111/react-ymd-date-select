@@ -9,4 +9,6 @@ export interface PresetComponentProps
   yearWidth?: number;
   monthWidth?: number;
   dayWidth?: number;
+  addMonthLabel?: boolean;
+  addDayLabel?: boolean;
 }

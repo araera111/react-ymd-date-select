@@ -17,6 +17,8 @@ export interface DateDropdownGroupProps {
   yearWidth?: number;
   monthWidth?: number;
   dayWidth?: number;
+  addMonthLabel?: boolean;
+  addDayLabel?: boolean;
 }
 
 const DateDropdownGroup = React.forwardRef<
@@ -54,6 +56,7 @@ const DateDropdownGroup = React.forwardRef<
         {props.monthOptions.map(({ value, label }) => (
           <option key={value} value={value}>
             {label}
+            {props.addMonthLabel ? "月" : ""}
           </option>
         ))}
       </Select>
@@ -69,6 +72,7 @@ const DateDropdownGroup = React.forwardRef<
           {props.dayOptions.map(({ value, label }) => (
             <option key={value} value={value}>
               {label}
+              {props.addDayLabel ? "日" : ""}
             </option>
           ))}
         </Select>

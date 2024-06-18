@@ -25,6 +25,8 @@ const DateSelect = React.forwardRef<any, DateSelectProps>(
         yearWidth={dateSelectOpts.yearWidth}
         monthWidth={dateSelectOpts.monthWidth}
         dayWidth={dateSelectOpts.dayWidth}
+        addMonthLabel={dateSelectOpts.addMonthLabel}
+        addDayLabel={dateSelectOpts.addDayLabel}
       />
     );
   }
