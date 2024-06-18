@@ -1,6 +1,6 @@
 {
   "name": "react-ymd-date-select-seireki",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "react-ymd-date-selectさんで西暦表記ができるようにした版",
   "keywords": [
     "date",
