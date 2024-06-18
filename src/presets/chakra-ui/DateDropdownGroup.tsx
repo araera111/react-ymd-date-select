@@ -23,6 +23,11 @@ const DateDropdownGroup = React.forwardRef<
   HTMLSelectElement,
   DateDropdownGroupProps
 >((props, ref) => {
+  console.log({
+    yearW: props.yearWidth,
+    monthW: props.monthWidth,
+    dayW: props.dayWidth,
+  });
   return (
     <HStack>
       <Select
