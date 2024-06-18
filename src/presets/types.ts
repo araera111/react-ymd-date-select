@@ -5,4 +5,5 @@ export interface PresetComponentProps
   extends ReactHookFormCompatibleProps,
     UseDateSelectOptions {
   hideDay?: boolean;
+  size?: "xs" | "sm" | "md" | "lg";
 }

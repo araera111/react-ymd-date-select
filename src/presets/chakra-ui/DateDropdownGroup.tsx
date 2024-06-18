@@ -13,6 +13,7 @@ export interface DateDropdownGroupProps {
   onMonthChange: React.ChangeEventHandler<HTMLSelectElement>;
   onDayChange: React.ChangeEventHandler<HTMLSelectElement>;
   hideDay?: boolean;
+  size?: "xs" | "sm" | "md" | "lg";
 }
 
 const DateDropdownGroup = React.forwardRef<
@@ -21,7 +22,11 @@ const DateDropdownGroup = React.forwardRef<
 >((props, ref) => {
   return (
     <HStack>
-      <Select value={props.yearValue} onChange={props.onYearChange}>
+      <Select
+        value={props.yearValue}
+        onChange={props.onYearChange}
+        size={props.size ?? "md"}
+      >
         <option value="" disabled></option>
         {props.yearOptions.map(({ value, label }) => (
           <option key={value} value={value}>
@@ -33,6 +38,7 @@ const DateDropdownGroup = React.forwardRef<
         value={props.monthValue}
         onChange={props.onMonthChange}
         ref={props.hideDay ? ref : undefined}
+        size={props.size ?? "md"}
       >
         <option value="" disabled></option>
         {props.monthOptions.map(({ value, label }) => (
@@ -42,7 +48,12 @@ const DateDropdownGroup = React.forwardRef<
         ))}
       </Select>
       {!props.hideDay && (
-        <Select value={props.dayValue} onChange={props.onDayChange} ref={ref}>
+        <Select
+          value={props.dayValue}
+          onChange={props.onDayChange}
+          ref={ref}
+          size={props.size ?? "md"}
+        >
           <option value="" disabled></option>
           {props.dayOptions.map(({ value, label }) => (
             <option key={value} value={value}>
