@@ -22,6 +22,9 @@ const DateSelect = React.forwardRef<any, DateSelectProps>(
         hideDay={hideDay}
         ref={ref}
         size={size}
+        yearWidth={dateSelectOpts.yearWidth}
+        monthWidth={dateSelectOpts.monthWidth}
+        dayWidth={dateSelectOpts.dayWidth}
       />
     );
   }

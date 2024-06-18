@@ -6,4 +6,7 @@ export interface PresetComponentProps
     UseDateSelectOptions {
   hideDay?: boolean;
   size?: "xs" | "sm" | "md" | "lg";
+  yearWidth?: number;
+  monthWidth?: number;
+  dayWidth?: number;
 }

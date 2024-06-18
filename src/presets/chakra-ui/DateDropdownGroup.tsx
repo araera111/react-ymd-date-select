@@ -14,6 +14,9 @@ export interface DateDropdownGroupProps {
   onDayChange: React.ChangeEventHandler<HTMLSelectElement>;
   hideDay?: boolean;
   size?: "xs" | "sm" | "md" | "lg";
+  yearWidth?: number;
+  monthWidth?: number;
+  dayWidth?: number;
 }
 
 const DateDropdownGroup = React.forwardRef<
@@ -26,6 +29,7 @@ const DateDropdownGroup = React.forwardRef<
         value={props.yearValue}
         onChange={props.onYearChange}
         size={props.size ?? "md"}
+        w={props.yearWidth ?? "full"}
       >
         <option value="" disabled></option>
         {props.yearOptions.map(({ value, label }) => (
@@ -39,6 +43,7 @@ const DateDropdownGroup = React.forwardRef<
         onChange={props.onMonthChange}
         ref={props.hideDay ? ref : undefined}
         size={props.size ?? "md"}
+        w={props.monthWidth ?? "full"}
       >
         <option value="" disabled></option>
         {props.monthOptions.map(({ value, label }) => (
@@ -53,6 +58,7 @@ const DateDropdownGroup = React.forwardRef<
           onChange={props.onDayChange}
           ref={ref}
           size={props.size ?? "md"}
+          w={props.dayWidth ?? "full"}
         >
           <option value="" disabled></option>
           {props.dayOptions.map(({ value, label }) => (
