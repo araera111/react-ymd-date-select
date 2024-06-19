@@ -42,7 +42,17 @@ const DateDropdownGroup = React.forwardRef<
       </Select>
       <Select
         value={props.monthValue}
-        onChange={props.onMonthChange}
+        onChange={(e) => {
+          // もともと31日まで選択されていて、たとえばうるう年ではない2月のときは日付が31日になってしまうので、日付を再設定する
+          const year = Number(props.yearValue);
+          const month = Number(e.target.value);
+          const lastDay = new Date(year, month, 0).getDate();
+          if (Number(props.dayValue) > lastDay) {
+            props.onDayChange({ target: { value: lastDay } } as any);
+            return;
+          }
+          props.onMonthChange(e);
+        }}
         ref={props.hideDay ? ref : undefined}
         size={props.size ?? "md"}
         w={props.monthWidth + "px" ?? "full"}
