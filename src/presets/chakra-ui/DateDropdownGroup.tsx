@@ -25,11 +25,6 @@ const DateDropdownGroup = React.forwardRef<
   HTMLSelectElement,
   DateDropdownGroupProps
 >((props, ref) => {
-  console.log({
-    yearW: props.yearWidth,
-    monthW: props.monthWidth,
-    dayW: props.dayWidth,
-  });
   return (
     <HStack>
       <Select
@@ -69,12 +64,20 @@ const DateDropdownGroup = React.forwardRef<
           w={props.dayWidth + "px" ?? "full"}
         >
           <option value="" disabled></option>
-          {props.dayOptions.map(({ value, label }) => (
-            <option key={value} value={value}>
-              {label}
-              {props.addDayLabel ? "日" : ""}
-            </option>
-          ))}
+          {props.dayOptions
+            .filter((x) => {
+              // y,m,dで選択された年月の日数を取得
+              const year = Number(props.yearValue);
+              const month = Number(props.monthValue);
+              const lastDay = new Date(year, month, 0).getDate();
+              return Number(x.value) <= lastDay;
+            })
+            .map(({ value, label }) => (
+              <option key={value} value={value}>
+                {label}
+                {props.addDayLabel ? "日" : ""}
+              </option>
+            ))}
         </Select>
       )}
     </HStack>
