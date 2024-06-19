@@ -49,7 +49,6 @@ const DateDropdownGroup = React.forwardRef<
           const lastDay = new Date(year, month, 0).getDate();
           if (Number(props.dayValue) > lastDay) {
             props.onDayChange({ target: { value: lastDay } } as any);
-            return;
           }
           props.onMonthChange(e);
         }}
